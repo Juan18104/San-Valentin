@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>San Valentín 💖</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --wine: #3a0f24;
+      --rose: #c7365f;
+      --gold: #f4c97a;
+      --glass: rgba(255,255,255,0.15);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at top, #5a1c34, #12000a 70%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    /* ===== CARD ===== */
+    .card {
+      width: 90%;
+      max-width: 420px;
+      padding: 40px 30px;
+      background: var(--glass);
+      backdrop-filter: blur(22px);
+      border-radius: 26px;
+      border: 1px solid rgba(255,255,255,0.3);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.45);
+      text-align: center;
+      animation: fadeIn 1s ease;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      margin-bottom: 14px;
+    }
+
+    p {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border-radius: 14px;
+      border: none;
+      font-size: 1rem;
+      margin-bottom: 18px;
+      text-align: center;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border-radius: 30px;
+      border: none;
+      background: linear-gradient(135deg, #d13b63, #8b1d3a);
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    }
+
+    .error {
+      margin-top: 12px;
+      color: #ff8fa3;
+      font-size: 0.85rem;
+    }
+
+    .hidden { display: none; }
+
+    /* ===== MENU ===== */
+    .menu button {
+      margin-bottom: 14px;
+    }
+
+    /* ===== GALERÍA ===== */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 130px;
+      object-fit: cover;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.45);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 14px 32px rgba(0,0,0,0.6);
+    }
+
+    /* ===== PREGUNTA ===== */
+    .buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .no {
+      background: #555;
+      position: relative;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ACCESO -->
+  <div class="card" id="login">
+    <h1>Antes de entrar ❤️</h1>
+    <p>¿Cuál es el nombre de la mujer más hermosa del universo?</p>
+    <input type="text" id="secret" placeholder="Escribe su nombre 💖">
+    <button onclick="checkName()">Entrar</button>
+    <div class="error" id="error"></div>
+  </div>
+
+  <!-- MENU -->
+  <div class="card hidden" id="menu">
+    <h1>Para ti ❤️</h1>
+    <div class="menu">
+      <button onclick="show('letter')">💌 Carta</button>
+      <button onclick="show('photos')">📸 Álbum</button>
+      <button onclick="show('question')">❤️ Pregunta</button>
+    </div>
+  </div>
+
+  <!-- CARTA -->
+  <div class="card hidden" id="letter">
+    <h1>Mi cartita</h1>
+    <p>
+      Princesita de mi vida, quiero decirle lo mucho que le amo y quería hacerle un pequeño detalle para expresar 
+      todo lo que siento y lo feliz que soy al compartir cada momento a su lado. Espero que le guste mucho y que 
+      nunca se olvide lo mucho que le amo y lo seguro que estoy de compartir el resto de mi vida a su lado esposita 
+      perfecta.❤️
+    </p>
+    <button onclick="back()">Volver</button>
+  </div>
+
+  <!-- ÁLBUM -->
+  <div class="card hidden" id="photos">
+    <h1>Algunos de nuestros momentos</h1>
+    <div class="gallery">
+      <img src="Fotos/Foto1.jpeg" alt="Recuerdo 1">
+      <img src="Fotos/Foto2.jpeg" alt="Recuerdo 2">
+      <img src="Fotos/Foto3.jpeg" alt="Recuerdo 3">
+      <img src="Fotos/Foto4.jpeg" alt="Recuerdo 4">
+    </div>
+    <button onclick="back()" style="margin-top:20px">Volver</button>
+  </div>
+
+  <!-- PREGUNTA -->
+  <div class="card hidden" id="question">
+    <h1>¿Quieres ser mi San Valentín? 💘</h1>
+    <div class="buttons">
+      <button onclick="show('invite')">Sí ❤️</button>
+      <button class="no" id="no">No 😔</button>
+    </div>
+    <button onclick="back()" style="margin-top:20px">Volver</button>
+  </div>
+
+  <!-- INVITACIÓN -->
+  <div class="card hidden" id="invite">
+    <h1>Está invitada a una cita ❤️</h1>
+    <p>
+      📅 Fecha: 14 de febrero del 2026 <br>
+      🕯️ Hora: 17:00 <br>
+      📍 Lugar: Frente al mar <br><br>
+      Le espero con mucho mucho amor princesita de mi vida❤️
+    </p>
+  </div>
+
+  <script>
+    const correctName = "gisselle";z
+
+    function normalize(text) {
+      return text.toLowerCase().normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "").trim();
+    }
+
+    function checkName() {
+      const input = normalize(document.getElementById('secret').value);
+      if (input === correctName) {
+        show('menu');
+      } else {
+        document.getElementById('error').innerText =
+          'Incorrecto... intenta de nuevo princesa 💖';
+      }
+    }
+
+    function show(id) {
+      document.querySelectorAll('.card')
+        .forEach(c => c.classList.add('hidden'));
+      document.getElementById(id).classList.remove('hidden');
+    }
+
+    function back() {
+      show('menu');
+    }
+
+    const noBtn = document.getElementById('no');
+    noBtn.addEventListener('mouseover', () => {
+      noBtn.style.position = 'absolute';
+      noBtn.style.left = Math.random() * 200 + 'px';
+      noBtn.style.top = Math.random() * 200 + 'px';
+    });
+  </script>
+
+</body>
+</html>
